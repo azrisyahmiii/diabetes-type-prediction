@@ -1,117 +1,72 @@
-Sure! Here’s a **README.md** file that explains how to set up and run your **Streamlit app**.  
+# Diabetes Prediction using Machine Learning
 
-I'll generate it as a Markdown file so it can be used directly on **GitHub or any documentation platform**.
+This project aims to predict the type of diabetes a patient may have using machine learning models. The dataset contains various medical parameters, and the models are trained to classify different types of diabetes.
 
----
+## Project Overview
 
-### **📌 README.md**
-```md
-# 🏥 Diabetes Type Prediction App
+- **Exploratory Data Analysis (EDA)**: Conducted in `main.ipynb` to clean, analyze, and visualize data.
+- **Feature Selection & Model Training**: Implemented using various machine learning classifiers.
+- **Diabetes Prediction Web App**: A Streamlit-based web application (`app.py`) for user interaction and prediction.
 
-This is a **Streamlit web application** that predicts the **type of diabetes** a patient has based on various health parameters.
+## Dataset
 
-## 📂 Project Structure
-```
-📁 saved_models/       # Folder containing trained ML models
-📄 app.py              # Streamlit application (Run this file)
-📄 main.ipynb          # Jupyter Notebook for model training
-📄 diabetes_dataset00.csv  # Dataset used for training (optional)
-📄 requirements.txt    # Dependencies file
-```
+The dataset consists of **70,000** instances with **34** attributes. The target variable is the type of diabetes diagnosed.
 
----
+**Dataset Source:** The dataset is obtained from Kaggle: [Diabetes Dataset](https://www.kaggle.com/datasets/ankitbatra1210/diabetes-dataset/data)
 
-## 🚀 **How to Run the App**
-Follow these steps to set up and run the app:
+## Running the Project
 
-### **1️⃣ Install Python**
-Make sure you have **Python 3.8 or later** installed. You can download it from:
-🔗 [Python Official Website](https://www.python.org/downloads/)
+### 1. Perform Data Analysis & Model Training
 
-To check your Python version, run:
-```bash
-python --version
-```
+Run the Jupyter Notebook `main.ipynb` to:
+- Load and preprocess the dataset
+- Perform feature selection using Boruta
+- Train multiple models (Logistic Regression, Decision Tree, SVM, Random Forest, Gradient Boosting, XGBoost, etc.)
+- Evaluate model performance
 
----
+### 2. Run the Diabetes Prediction Web App
 
-### **2️⃣ Create & Activate a Virtual Environment (Recommended)**
-It’s best to use a virtual environment to avoid dependency conflicts.
+To launch the web application:
 
-#### **Windows**
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-#### **Mac/Linux**
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
----
-
-### **3️⃣ Install Dependencies**
-Once inside the project folder, run:
-```bash
-pip install -r requirements.txt
-```
-This will install **Streamlit, Pandas, Scikit-learn, Joblib**, and all necessary packages.
-
----
-
-### **4️⃣ Run the Streamlit App**
-Start the web app by running:
 ```bash
 streamlit run app.py
 ```
-This will launch the **web application** in your default browser.
 
----
+This will start a local Streamlit server, and you can interact with the app in your browser.
 
-## 🎯 **How the App Works**
-1️⃣ Enter patient health details in the input fields.  
-2️⃣ Click **"Predict Diabetes Type"**.  
-3️⃣ The model will classify the **type of diabetes**.  
-4️⃣ Warnings are displayed for **severe diabetes types**.
+## Model Details
 
----
+- **Random Forest** is used as the predictive model for the app as it is the best-performing model
+- The model is stored in `saved_models/Random Forest.pkl` along with:
+  - `scaler.pkl` (for feature scaling)
+  - `target_encoder.pkl` (for label encoding)
+  - `selected_features.pkl` (features used for prediction)
+- **Changing the Model**: You can change the model used in `app.py` by modifying the following line:
+  ```python
+  best_model_name = "Random Forest.pkl" # can be changed to any model
+  ```
+  Replace it with the name of another `.pkl` model available in the `saved_models/` directory.
+  
+## Project Structure
 
-## 🛠 **Troubleshooting**
-### **1️⃣ "ModuleNotFoundError"**
-If you see an error like:
 ```
-ModuleNotFoundError: No module named 'streamlit'
+├── saved_models/         # Trained model and preprocessing tools
+│   ├── Decision Tree.pkl
+│   ├── Gradient Boosting.pkl
+│   ├── K-Nearest Neighbors.pkl
+│   ├── Logistic Regression.pkl
+│   ├── Naive Bayes.pkl
+│   ├── Random Forest.pkl
+│   ├── Support Vector Machine.pkl
+│   ├── XGBoost.pkl
+│   ├── scaler.pkl
+│   ├── label_encoders.pkl
+│   ├── target_encoder.pkl
+│   ├── selected_features.pkl
+├── app.py                # Streamlit Web App
+├── main.ipynb            # Data Analysis & Model Training Notebook
+├── diabetes_dataset00.csv  # Dataset
+└── README.md
 ```
-Try running:
-```bash
-pip install streamlit
-```
 
-### **2️⃣ "scaler.pkl" or "diabetes_model.pkl" Not Found**
-Make sure `saved_models/` contains:
-✅ `diabetes_model.pkl`  
-✅ `scaler.pkl`  
-✅ `target_encoder.pkl`  
-
-If these files are missing, re-run the model training in **`main.ipynb`**.
-
----
-
-## 📌 **Future Improvements**
-✅ Deploy the app online using **Streamlit Cloud / Render**.  
-✅ Add **interactive visualizations** for better insights.  
-✅ Implement **batch predictions (CSV Upload)**.
-
----
-
-## 👨‍💻 **Author**
-**Your Name**  
-📧 your.email@example.com  
-🔗 [GitHub Profile](https://github.com/your-username)
-
----
-
-### ✅ **Now, just save this as `README.md` in your project folder!**  
-Would you like any modifications or additional details? 🚀🔥
+Developed as part of a Data Mining project for **CDS6314 Data Mining** under Multimedia University Cyberjaya.
